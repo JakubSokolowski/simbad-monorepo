@@ -1,0 +1,15 @@
+[submodule "simbad-cli"]
+	path = simbad-cli
+	url = https://github.com/biel-wro/SimBaD.git
+[submodule "simbad-host-link"]
+	path = simbad-host-link
+	url = https://github.com/JakubSokolowski/simbad-host-link.git
+[submodule "simbad-pipeline-server"]
+	path = simbad-pipeline-server
+	url = https://github.com/JakubSokolowski/simbad-pipeline-server.git
+[submodule "simbad-analyzer"]
+	path = simbad-analyzer
+	url = https://github.com/tozanski/SimBaD-analyzer.git
+[submodule "simbad-client"]
+	path = simbad-client
+	url = https://github.com/JakubSokolowski/simbad-client.git
