@@ -17,6 +17,7 @@ simulation: {
 step: {
     id: '1231231',
     simulationId: '123123123',
+    origin: ''
     status: '',
     startedUtc: '',
     finishedUtc: '',
