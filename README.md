@@ -4,7 +4,7 @@ Repo with all Simbad components added as submodules
 
 [Project Documentation](https://simbad-docs.readthedocs.io)
 
-### Updating submodules to lates
+### Updating submodules to latest
 ```
 git submodule foreach git pull origin master
 git add .

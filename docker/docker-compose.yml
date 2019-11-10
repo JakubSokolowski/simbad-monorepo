@@ -1,19 +1,20 @@
 version: '3.4'
 services:
   api:
-    build: 
+    build:
       context: ../simbad-pipeline-server
       dockerfile: ./docker/Dockerfile
     image: simbad-pipeline-server
     container_name: simbad-pipeline-server-api
     command: python entrypoint_api.py --port 8081 --debug
     env_file:
-     - ./docker.env
+      - ./docker.env
     ports:
       - "8081:8081"
     volumes:
-      - .:/app/
-    network_mode: host
+      - ../data:/usr/data
+    depends_on:
+      - redis
   worker:
     build:
       context: ../simbad-pipeline-server
@@ -24,9 +25,9 @@ services:
       - redis
     command: celery worker -A entrypoint_celery.celery --loglevel=info
     env_file:
-     - ./docker.env
+      - ./docker.env
     volumes:
-      - .:/app/
+      - ../data:/usr/data
   redis:
     image: redis:alpine
     container_name: redis
