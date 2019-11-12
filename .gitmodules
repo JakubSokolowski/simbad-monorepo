@@ -13,3 +13,6 @@
 [submodule "simbad-client"]
 	path = simbad-client
 	url = https://github.com/JakubSokolowski/simbad-client.git
+[submodule "simbad-analyzer-server"]
+	path = simbad-analyzer-server
+	url = git@github.com:JakubSokolowski/simbad-analyzer-server.git
