@@ -51,4 +51,9 @@ services:
     network_mode: host
 
 volumes:
-  shared: {}
+  sshfs:
+    name: sshfs
+    driver: vieux/sshfs:latest
+    driver_opts:
+      sshcmd: "pi@192.168.0.32:/home/pi/simbad/data"
+      password: "simbadcore"
