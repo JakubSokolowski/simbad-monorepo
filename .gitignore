@@ -2,5 +2,6 @@
 _build/
 _static/
 _templates/
+_venv/
 data/
 /wrkspace.code-workspace
