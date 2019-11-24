@@ -1,11 +1,11 @@
 version: '3.4'
 services:
-  api:
+  pipeline:
     build:
       context: ../simbad-pipeline-server
       dockerfile: ./docker/Dockerfile
     image: simbad-pipeline-server
-    container_name: simbad-pipeline-server-api
+    container_name: simbad-pipeline-server
     command: python entrypoint_api.py --port 8081 --debug
     env_file:
       - ./docker.env
@@ -13,6 +13,7 @@ services:
       - "8081:8081"
     volumes:
       - ../data:/usr/data
+#      - sshfs:/usr/sshfs
     depends_on:
       - redis
   worker:
@@ -21,6 +22,8 @@ services:
       dockerfile: ./docker/Dockerfile
     image: simbad-pipeline-server-worker
     container_name: celery-worker
+    links:
+      - analyzer-server
     depends_on:
       - redis
     command: celery worker -A entrypoint_celery.celery --loglevel=info
@@ -28,6 +31,25 @@ services:
       - ./docker.env
     volumes:
       - ../data:/usr/data
+#      - sshfs:/usr/sshfs
+  analyzer-server:
+    build:
+      context: ../simbad-analyzer-server
+      dockerfile: ./docker/Dockerfile
+    image: simbad-analyzer-server
+    container_name: simbad-analyzer-server
+    command: python3 app.py --port 5000 --debug
+    env_file:
+      - ./docker.env
+    volumes:
+      - ../data:/usr/data
+      - ./log4j.properties:/opt/spark-2.4.3-bin-hadoop2.7/conf/log4j.properties
+#      - sshfs:/usr/sshfs
+    depends_on:
+      - redis
+    ports:
+      - "5000:5000"
+      - "4040:4040"
   redis:
     image: redis:alpine
     container_name: redis
@@ -38,7 +60,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-  web:
+  client:
     image: simbad-client-nginx
     container_name: simbad-client-nginx
     ports:
