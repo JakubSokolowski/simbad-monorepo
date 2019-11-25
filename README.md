@@ -15,7 +15,7 @@ git push
 ## Running simulation
 Clone the project:
 ```
-git clone https://github.com/JakubSokolowski/hesoyam-docker.git --recurse-submodules 
+git clone https://github.com/JakubSokolowski/simbad-monorepo.git --recurse-submodules 
 cd simbad-monorepo
 ```
 ### Running dev version (build Dockerfiles from source): 
