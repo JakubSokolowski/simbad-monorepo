@@ -51,8 +51,9 @@ services:
   client:
     image: jsokolowski/simbad-client
     container_name: simbad-client
+    links:
+        - pipeline
     ports:
       - "8080:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-    network_mode: host

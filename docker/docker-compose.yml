@@ -13,7 +13,6 @@ services:
       - "8081:8081"
     volumes:
       - ../data:/usr/data
-#      - sshfs:/usr/sshfs
     depends_on:
       - redis
   worker:
@@ -31,7 +30,6 @@ services:
       - ./docker.env
     volumes:
       - ../data:/usr/data
-#      - sshfs:/usr/sshfs
   analyzer-server:
     build:
       context: ../simbad-analyzer-server
@@ -44,7 +42,6 @@ services:
     volumes:
       - ../data:/usr/data
       - ./log4j.properties:/opt/spark-2.4.3-bin-hadoop2.7/conf/log4j.properties
-#      - sshfs:/usr/sshfs
     depends_on:
       - redis
     ports:
@@ -55,14 +52,11 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
   client:
     image: jsokolowski/simbad-client
     container_name: simbad-client
+    links:
+      - pipeline
     ports:
       - "8080:80"
     volumes:
@@ -70,12 +64,3 @@ services:
     build:
       context: ../simbad-client
       dockerfile: ./docker/simbad-production.Dockerfile
-    network_mode: host
-
-volumes:
-  sshfs:
-    name: sshfs
-    driver: vieux/sshfs:latest
-    driver_opts:
-      sshcmd: "pi@192.168.0.32:/home/pi/simbad/data"
-      password: "simbadcore"
