@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   pipeline:
-    image: jsokolowski/simbad-pipeline-server
+    image: simbadbot/simbad-pipeline-server
     container_name: simbad-pipeline-server
     command: python entrypoint_api.py --port 8081 --debug
     env_file:
@@ -13,19 +13,20 @@ services:
     depends_on:
       - redis
   worker:
-    image: jsokolowski/simbad-pipeline-worker
+    image: simbadbot/simbad-pipeline-worker
     container_name: celery-worker
     links:
       - analyzer-server
     depends_on:
       - redis
+      - pipeline
     command: celery worker -A entrypoint_celery.celery --loglevel=info
     env_file:
       - ./docker.env
     volumes:
       - ../data:/usr/data
   analyzer-server:
-    image: jsokolowski/simbad-analyzer-server
+    image: simbadbot/simbad-analyzer-server
     container_name: simbad-analyzer-server
     command: python3 app.py --port 5000 --debug
     env_file:
@@ -49,7 +50,7 @@ services:
       timeout: 10s
       retries: 3
   client:
-    image: jsokolowski/simbad-client
+    image: simbadbot/simbad-client
     container_name: simbad-client
     links:
         - pipeline

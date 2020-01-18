@@ -1,0 +1,49 @@
+version: '3.4'
+services:
+  pipeline:
+    build:
+      context: ../simbad-pipeline-server
+      dockerfile: ./docker/Dockerfile
+    image: simbadbot/simbad-pipeline-server
+    depends_on:
+      - pipeline-base
+  pipeline-base:
+    image: simbadbot/simbad-pipeline-base
+    build:
+      context: ../simbad-pipeline-server
+      dockerfile: ./docker/pipeline-base.Dockerfile
+    depends_on:
+      - simulator
+  simulator:
+    image: simbadbot/simbad
+    build:
+      context: ../simbad-cli
+      dockerfile: ./docker/multistage-gcc8-boost1.67.Dockerfile
+  worker:
+    image: simbadbot/simbad-pipeline-worker
+    build:
+      context: ../simbad-pipeline-server
+      dockerfile: ./docker/Dockerfile
+  analyzer:
+    image: simbadbot/simbad-analyzer
+    build:
+      context: ../simbad-analyzer
+      dockerfile: Dockerfile
+  analyzer-server:
+    image: simbadbot/simbad-analyzer-server
+    build:
+      context: ../simbad-analyzer-server
+      dockerfile: ./docker/Dockerfile
+  client:
+    image: simbadbot/simbad-client
+    depends_on:
+      - viewer
+    build:
+      context: ../simbad-client
+      dockerfile: ./docker/simbad-production.Dockerfile
+  viewer:
+    image: simbadbot/simbad-viewer
+    container_name: simbad-viewer
+    build:
+      context: ../simbad-viewer
+      dockerfile: ./docker/simbad-viewer.Dockerfile

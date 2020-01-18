@@ -16,3 +16,6 @@
 [submodule "simbad-analyzer-server"]
 	path = simbad-analyzer-server
 	url = git@github.com:JakubSokolowski/simbad-analyzer-server.git
+[submodule "simbad-viewer"]
+	path = simbad-viewer
+	url = git@github.com:JakubSokolowski/simbad-viewer.git
