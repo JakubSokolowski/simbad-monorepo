@@ -21,14 +21,13 @@ cd simbad-monorepo
 ### Running dev version (build Dockerfiles from source): 
 In project root folder:
 ```
-docker-compose -f docker/docker-compose.yml build
-docker-compose -f docker/docker-compose.yml up
+docker-compose -f docker/build-docker-compose.yml build
+docker-compose -f docker/prod-docker-compose.yml up
 ```
 Go to http://localhost:8080/#/examples/simulation-pipeline
-### Running prod version (build Dockerfiles docker hub): 
+### Running prod version (build Dockerfiles docker hub and local tags): 
 In project root folder:
 ```
-docker-compose -f docker/prod-docker-compose.yml build
 docker-compose -f docker/prod-docker-compose.yml up
 ```
 Go to http://localhost:8080/#/examples/simulation-pipeline
