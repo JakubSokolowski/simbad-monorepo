@@ -1,21 +1,18 @@
 [submodule "simbad-cli"]
 	path = simbad-cli
-	url = https://github.com/biel-wro/SimBaD.git
-[submodule "simbad-host-link"]
-	path = simbad-host-link
-	url = https://github.com/JakubSokolowski/simbad-host-link.git
+	url =  git@github.com:biel-wro/SimBaD.git
 [submodule "simbad-pipeline-server"]
 	path = simbad-pipeline-server
-	url = https://github.com/JakubSokolowski/simbad-pipeline-server.git
+	url = https://github.com/biel-wro/simbad-pipeline-server.git
 [submodule "simbad-analyzer"]
 	path = simbad-analyzer
 	url = https://github.com/tozanski/SimBaD-analyzer.git
 [submodule "simbad-client"]
 	path = simbad-client
-	url = https://github.com/JakubSokolowski/simbad-client.git
+	url =  git@github.com:biel-wro/simbad-client.git
 [submodule "simbad-analyzer-server"]
 	path = simbad-analyzer-server
-	url = git@github.com:JakubSokolowski/simbad-analyzer-server.git
+	url = git@github.com:biel-wro/simbad-analyzer-server.git
 [submodule "simbad-viewer"]
 	path = simbad-viewer
-	url = git@github.com:JakubSokolowski/simbad-viewer.git
+	url = git@github.com:biel-wro/simbad-viewer.git
